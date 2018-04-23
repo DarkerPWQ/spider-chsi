@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/chsi-common/chsi-common.iml" filepath="$PROJECT_DIR$/chsi-common/chsi-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chsi-main/chsi-main.iml" filepath="$PROJECT_DIR$/chsi-main/chsi-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chsi-processor/chsi-processor.iml" filepath="$PROJECT_DIR$/chsi-processor/chsi-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spider-chsi.iml" filepath="$PROJECT_DIR$/.idea/spider-chsi.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="chsi-common" />
+        <module name="chsi-main" />
+        <module name="chsi-processor" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="chsi-common" target="1.8" />
+      <module name="chsi-main" target="1.8" />
+      <module name="chsi-processor" target="1.8" />
+      <module name="spider-chsi" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,82 @@
+<configuration>
+
+    <property name="log.base" value="/data/log"  />
+    <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
+
+    <!-- 控制台输出 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- root -->
+    <appender name="root" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/chsigk-root.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/chsigk-root-%i.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>512MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 异常 -->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/chsigk-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/chsigk-error-%i.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>512MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 处理器 -->
+    <appender name="center" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/chsigk-center.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/chsigk-center-%i.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>512MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 外部jar包 日志级别设置 -->
+    <logger level="ERROR" name="org.springframework"/>
+    <logger level="ERROR" name="java.sql"/>
+    <logger level="ERROR" name="org.apache"/>
+    <logger level="ERROR" name="com.alibaba"/>
+
+    <logger level="INFO" name="com.pwq.chsi.center" additivity="false">
+        <appender-ref ref="center"/>
+    </logger>
+
+    <!--<logger level="ERROR" name="com.xinyan.spider.pay.exception">-->
+        <!--<appender-ref ref="error"/>-->
+    <!--</logger>-->
+
+    <!-- 日志过滤 -->
+    <logger name="com.pwq.chsi.chsimain">
+        <level value="info"/>
+    </logger>
+
+    <!-- root级别控制 -->
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="root" />
+    </root>
+</configuration>

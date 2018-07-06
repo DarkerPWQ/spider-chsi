@@ -35,10 +35,6 @@ public class AbstractProcessor implements PageProcessor {
 
     @Value("${enableProxy}")
     private boolean enableProxy;
-    @Value("${spiderManager}")
-    private String spiderManager;
-    @Value("${spiderRoute}")
-    private String spiderRoute;
     @Value("${xdlOrderNo}")
     private String xdlOrderNo;
     @Value("${xdlSecret}")

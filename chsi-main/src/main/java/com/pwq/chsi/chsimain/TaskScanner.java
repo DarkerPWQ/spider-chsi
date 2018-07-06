@@ -1,11 +1,9 @@
 package com.pwq.chsi.chsimain;
 
-import com.alibaba.fastjson.JSONObject;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.pwq.spider.chsi.common.Constants;
 import com.pwq.spider.chsi.common.error.SpiderException;
-import com.pwq.spider.chsi.common.http.Context;
 import com.pwq.spider.chsi.common.http.PageProcessor;
 import com.pwq.spider.chsi.common.http.Result;
 import com.pwq.spider.chsi.common.utils.IdentityUtils;
@@ -40,8 +38,6 @@ public class TaskScanner implements Runnable, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    @Value("${spiderRoute}")
-    private String spiderRoute;
 
     @Value("${taskType}")
     private String taskType;
@@ -58,7 +54,6 @@ public class TaskScanner implements Runnable, ApplicationContextAware {
         String taskId = "";
         String taskStatus = "";
         WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER);
-
         executeTask(webClient);
 
     }

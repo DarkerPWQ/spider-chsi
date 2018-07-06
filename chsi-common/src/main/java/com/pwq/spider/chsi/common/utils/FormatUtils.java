@@ -63,7 +63,8 @@ public class FormatUtils {
     public static  Map<String,String> list2map(List<List<String>> listList){
         Map<String,String> map = new HashMap<>();
         for(List<String> list:listList){
-            if(list.size()==2){
+            if(list.size()==2&&StringUtils.isNotEmpty(list.get(0))){
+                log.info("[{}]--->[{}]",list.get(0),list.get(1));
                 map.put(list.get(0),list.get(1));
             }
         }

@@ -11,11 +11,13 @@ import com.pwq.chsi.center.model.Speciality;
 import com.pwq.chsi.center.parser.GaokaoParser;
 import com.pwq.spider.chsi.common.CacheContainer;
 import com.pwq.spider.chsi.common.Constants;
+import com.pwq.spider.chsi.common.ProcessorCode;
 import com.pwq.spider.chsi.common.http.Result;
 import com.pwq.spider.chsi.common.utils.FormatUtils;
 import com.pwq.spider.chsi.common.utils.RegexUtils;
 import com.pwq.spider.chsi.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,10 +45,34 @@ public class GaokaoProcessor extends AbstractProcessor {
         Result result = new Result();
         //页面缓存
         CacheContainer cacheContainer = new CacheContainer();
-
-
+        List<Page> detailList = new ArrayList<>();
+        List<String> ccList = new ArrayList<>();
+        ccList.add("1050");
+        ccList.add("1060");
+        for(String cc:ccList){
+            for(Map.Entry<String,String> entryMl:getMl (webClient,cc).entrySet()){
+                for(Map.Entry<String,String> entryXk:getXk (webClient,entryMl.getKey()).entrySet()){
+                    for(Map.Entry<String,String> entrySpeciality:getSpecialityIdByXk (webClient,entryXk.getKey()).entrySet()){
+                        Speciality speciality = new Speciality();
+                        speciality.setCc(cc);
+                        speciality.setMl(entryMl.getKey());
+                        speciality.setXk(entryXk.getKey());
+                        speciality.setSpecialityId(entrySpeciality.getKey());
+                        Page page = specialityDetail(webClient,cacheContainer,speciality);
+                        if(null != page){
+                            detailList.add(page);
+                        }
+                    }
+                }
+            }
+        }
+        cacheContainer.putPages(ProcessorCode.SPECIALITY_DETAIL.getCode(),detailList);
         return result;
     }
+
+
+
+
 
     /**
      * @Author: WenqiangPu
@@ -85,7 +111,7 @@ public class GaokaoProcessor extends AbstractProcessor {
      * @return:
      * @Date: 13:53 2018/4/23
      */
-    private Map<String,String> getxk(WebClient webClient,String mlId){
+    private Map<String,String> getXk(WebClient webClient,String mlId){
         Map<String,String> map = new HashMap<>();
         HashMap<String, String> header = new HashMap<>();
         List<NameValuePair> reqParam = new ArrayList<>();
@@ -156,6 +182,12 @@ public class GaokaoProcessor extends AbstractProcessor {
         }
         return resultPage;
 
+    }
+
+
+    @Override
+    protected Logger getLogger() {
+        return log;
     }
 
 
